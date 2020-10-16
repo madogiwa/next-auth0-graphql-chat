@@ -12,6 +12,7 @@
     "postinstall": "typesync && yarn install --ignore-scripts"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.1.0",
     "@auth0/nextjs-auth0": "^0.16.0",
     "next": "latest",
     "react": "^16.12.0",
