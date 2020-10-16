@@ -19,7 +19,11 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <nav>
         <Link href="/">
           <a>Home</a>
-        </Link>{' '}
+        </Link>
+        <span> | </span>
+        <Link href="/my">
+          <a>MyPage(Auth Required)</a>
+        </Link>
         <span> | </span>
         <Username />
       </nav>
