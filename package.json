@@ -6,6 +6,9 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
+    "lint:es": "eslint 'src/**/*.{js,jsx,ts,jtsx}'",
+    "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,jtsx}'",
+    "lint:conflict": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "postinstall": "typesync && yarn install --ignore-scripts"
   },
   "dependencies": {
@@ -14,10 +17,23 @@
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "@types/eslint": "^7.2.4",
+    "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/node": "^14.11.8",
     "@types/prettier": "2.1.2",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prefer-arrow": "^1.2.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.4",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "prettier": "2.1.2",
     "typescript": "4.0",
     "typesync": "^0.7.0"
