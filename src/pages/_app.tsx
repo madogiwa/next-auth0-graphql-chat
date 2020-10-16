@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN || ''
   const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID || ''
-  const redirectUri = typeof window !== 'undefined' ? window.location.origin : ''
+  const redirectUri = typeof window !== 'undefined' ? `${window.location.origin}/callback` : ''
 
   return (
     <Auth0Provider
