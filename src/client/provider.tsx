@@ -21,22 +21,14 @@ const MyApolloProvider = ({ children }) => {
     }
   })
 
-  const authClient = new ApolloClient({
+  const client = new ApolloClient({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    link: authLink.concat(httpLink),
+    link: isAuthenticated ? authLink.concat(httpLink) : authLink,
     cache: new InMemoryCache(),
+    ssrMode: !process.browser,
   })
 
-  const noneAuthClient = new ApolloClient({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    link: httpLink,
-    cache: new InMemoryCache(),
-  })
-
-  if (isAuthenticated) {
-    return <ApolloProvider client={authClient}>{children}</ApolloProvider>
-  }
-  return <ApolloProvider client={noneAuthClient}>{children}</ApolloProvider>
+  return <ApolloProvider client={client}>{children}</ApolloProvider>
 }
 
 export default MyApolloProvider
