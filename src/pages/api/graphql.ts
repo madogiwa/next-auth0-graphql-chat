@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server-micro'
 import { loadFilesSync, mergeTypeDefs } from 'graphql-tools'
 import path from 'path'
 import { NextApiRequest, NextApiResponse } from 'next'
-import jwt from 'jsonwebtoken'
+import jwt, { Algorithm } from 'jsonwebtoken'
 import jwksClient from 'jwks-rsa'
 import resolvers from '../../server/graphqlResolvers'
 
@@ -17,10 +17,14 @@ const client = jwksClient({
   jwksUri: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}/.well-known/jwks.json`,
 })
 
-const getKey = (header, cb) => {
+const getKey = (header: any, cb: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   client.getSigningKey(header.kid, function (err, key) {
-    const signingKey = key.publicKey || key.rsaPublicKey
+    if (err != null) {
+      console.error(err)
+      return
+    }
+    const signingKey = key.getPublicKey()
     cb(null, signingKey)
   })
 }
@@ -29,7 +33,7 @@ const options = {
   audience: process.env.NEXT_PUBLIC_AUTH0_IDENTIFIER,
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   issuer: `https://${process.env.NEXT_PUBLIC_AUTH0_DOMAIN}/`,
-  algorithms: ['RS256'],
+  algorithms: ['RS256'] as Algorithm[],
 }
 
 const apolloServer = new ApolloServer({
@@ -48,7 +52,10 @@ const apolloServer = new ApolloServer({
         if (err) {
           return reject(err)
         }
-        return resolve(decoded.sub)
+        if (!decoded) {
+          return reject(Error('decode error'))
+        }
+        return resolve((decoded as any).sub)
       })
     })
 
