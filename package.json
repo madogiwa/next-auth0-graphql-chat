@@ -7,8 +7,8 @@
     "start": "next start",
     "type-check": "tsc",
     "codegen": "graphql-codegen --config codegen.yml",
-    "lint:es": "eslint 'src/**/*.{js,jsx,ts,jtsx}'",
-    "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,jtsx}'",
+    "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:conflict": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "postinstall": "typesync && yarn install --ignore-scripts"
   },
