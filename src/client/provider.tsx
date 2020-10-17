@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
+import { setContext } from '@apollo/link-context'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const MyApolloProvider = ({ children }) => {
