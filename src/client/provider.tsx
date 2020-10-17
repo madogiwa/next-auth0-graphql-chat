@@ -23,7 +23,7 @@ const MyApolloProvider = ({ children }) => {
 
   const client = new ApolloClient({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    link: isAuthenticated ? authLink.concat(httpLink) : authLink,
+    link: isAuthenticated ? authLink.concat(httpLink) : httpLink,
     cache: new InMemoryCache(),
     ssrMode: !process.browser,
   })
