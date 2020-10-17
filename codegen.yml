@@ -8,6 +8,8 @@ generates:
     plugins:
       - typescript
       - typescript-resolvers
+    config:
+      useIndexSignature: true
   ./src/client/gen/index.tsx:
     plugins:
       - typescript

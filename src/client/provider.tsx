@@ -2,6 +2,7 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { setContext } from '@apollo/link-context'
 import { useAuth0 } from '@auth0/auth0-react'
 
+// @ts-ignore
 const MyApolloProvider = ({ children }) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0()
 
