@@ -1,0 +1,6 @@
+
+query GetUserNames {
+  users {
+    name
+  }
+}
