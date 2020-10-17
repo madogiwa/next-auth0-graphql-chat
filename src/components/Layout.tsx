@@ -25,6 +25,10 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           <a>MyPage(Auth Required)</a>
         </Link>
         <span> | </span>
+        <Link href="/graphql">
+          <a>GraphQL</a>
+        </Link>
+        <span> | </span>
         <Username />
       </nav>
     </header>

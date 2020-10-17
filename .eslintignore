@@ -3,3 +3,4 @@
 /.eslintrc.js
 /postcss.config.js
 /scripts
+**/gen/*
