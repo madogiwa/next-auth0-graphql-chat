@@ -3,7 +3,7 @@ import { setContext } from '@apollo/link-context'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const MyApolloProvider = ({ children }) => {
-  const { getAccessTokenSilently } = useAuth0()
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0()
 
   const httpLink = createHttpLink({
     uri: '/api/graphql',
@@ -21,12 +21,22 @@ const MyApolloProvider = ({ children }) => {
     }
   })
 
-  const client = new ApolloClient({
+  const authClient = new ApolloClient({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   })
 
-  return <ApolloProvider client={client}>{children}</ApolloProvider>
+  const noneAuthClient = new ApolloClient({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    link: httpLink,
+    cache: new InMemoryCache(),
+  })
+
+  if (isAuthenticated) {
+    return <ApolloProvider client={authClient}>{children}</ApolloProvider>
+  }
+  return <ApolloProvider client={noneAuthClient}>{children}</ApolloProvider>
 }
 
 export default MyApolloProvider
