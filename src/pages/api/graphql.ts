@@ -1,13 +1,14 @@
-import { ApolloServer, gql } from 'apollo-server-micro'
+import { ApolloServer } from 'apollo-server-micro'
+import { loadFilesSync, mergeTypeDefs } from 'graphql-tools'
+import path from 'path'
 
-const typeDefs = gql`
-  type Query {
-    users: [User!]!
-  }
-  type User {
-    name: String
-  }
-`
+const typesArray = loadFilesSync(path.join(process.cwd(), 'graphql'), { extensions: ['graphql'] })
+const typeDefs = mergeTypeDefs(typesArray)
+
+console.log(__dirname)
+console.log(path.join(__dirname, './graphql'))
+console.dir(typesArray)
+console.dir(typeDefs)
 
 const resolvers = {
   Query: {
@@ -15,10 +16,14 @@ const resolvers = {
     users(parent, args, context) {
       return [{ name: 'データ1' }, { name: 'データ2' }]
     },
+    user(parent, args, context) {
+      return { name: 'データ1' }
+    },
   },
 }
 
 const apolloServer = new ApolloServer({
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   typeDefs,
   resolvers,
 })
