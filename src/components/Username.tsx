@@ -27,9 +27,15 @@ const Username = () => {
     )
   }
 
+  const onClickCallback = () => {
+    return loginWithRedirect({
+      appState: { returnTo: typeof window !== 'undefined' ? window.location.pathname : '/' },
+    })
+  }
+
   return (
     <>
-      <span onClick={loginWithRedirect}>LogIn</span>
+      <span onClick={onClickCallback}>LogIn</span>
     </>
   )
 }
